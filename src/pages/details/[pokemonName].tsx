@@ -1,15 +1,10 @@
 import Head from "next/head";
+import Image from "next/image";
 import { getPokemonDetail } from "../../../lib/pokemonAPI";
-import { PokemonImage } from "../../../components/ui/PokemonImage";
 import { GetServerSidePropsContext } from "next";
-import Link from "next/link";
 
 //localhost:3000/details/[pokemonName]
 export default function PokemonDetail({ pokemonDetail }: any) {
-  console.log(pokemonDetail);
-  if (!pokemonDetail) {
-    return <div>404</div>;
-  }
   return (
     <div>
       <Head>
@@ -31,10 +26,14 @@ export default function PokemonDetail({ pokemonDetail }: any) {
             pokemonDetail.name.slice(1)}
         </h1>
         <h6 className="text-center">Weight: {pokemonDetail.weight}</h6>
-        <img
+        <Image
           className="card-img-top"
-          src={pokemonDetail.sprites.front_default}
+          width={350}
+          height={450}
+          alt={pokemonDetail.name}
+          src={pokemonDetail.sprites.other["official-artwork"].front_default}
         />
+
         <div className="card-body">
           <div className="flex-col">
             {pokemonDetail.stats.map((statObject: any) => {
@@ -48,9 +47,21 @@ export default function PokemonDetail({ pokemonDetail }: any) {
                   key={statName}
                 >
                   <h3 className="p-3 w-2/4">
-                    {statName}: {statValue}
+                    {/* {statName}: {statValue} */}
+                    {statName.charAt(0).toUpperCase() + statName.slice(1)}
                   </h3>
-                  {/* <Progress className="w-2/4 m-auto" value={statValue} /> */}
+                  <div className="progress" style={{ maxWidth: "70%" }}>
+                    <div
+                      className="progress-bar bg-primary"
+                      role="progressbar"
+                      style={{ width: "25%" }}
+                      aria-valuenow="25"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    >
+                      {statValue}
+                    </div>
+                  </div>
                 </div>
               );
             })}

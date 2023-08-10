@@ -1,21 +1,28 @@
 import Link from "next/link";
+import Image from "next/image";
 
-interface PokemonCardProps {
-  name: string;
-}
-
-export default function ListPokemon({ name }: any) {
+export default function ListPokemon({ name, pokemonDetail }: any) {
   return (
-    <div
-      className="card bg-warning"
-      style={{ minWidth: "250px", marginTop: "15px", border: "1px solid " }}
+    <Link
+      href={`/details/${name}`}
+      className="btn btn-warning"
+      style={{
+        minWidth: "250px",
+        minHeight: "150px",
+        border: "1px solid",
+        display: "flex",
+        alignItems: "center",
+      }}
     >
-      <Link href={`/details/${name}`} className="btn btn-warning">
-        {/* <Link href={`detail/${name}`} className="btn btn-warning"> */}
-        <div className="card-body">
-          <h5 className="card-title">{name}</h5>
-        </div>
-      </Link>
-    </div>
+      {/* <Image
+          alt={name}
+          width={750}
+          height={750}
+          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokeImage}.png`}
+        /> */}
+      <div className="card-body">
+        <h5 className="card-title">{name}</h5>
+      </div>
+    </Link>
   );
 }
