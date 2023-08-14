@@ -55,9 +55,6 @@ export default function PokemonDetail({ pokemonDetail }: any) {
                       className="progress-bar bg-primary"
                       role="progressbar"
                       style={{ width: "25%" }}
-                      aria-valuenow="25"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
                     >
                       {statValue}
                     </div>
